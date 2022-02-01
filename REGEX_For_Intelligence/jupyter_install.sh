@@ -1,4 +1,4 @@
-sudo apt updaye -y;
+sudo apt update -y;
 sudo apt install python3-pip python3-dev;
 sudo mkdir ~/.jupyter;
 sudo -H pip install jupyter;
