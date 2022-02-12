@@ -1,0 +1,223 @@
+19:36:29 <chrismon> i'm having some trouble authenticating between MIT clients and Microsoft servers, can someone give me a hand?
+19:36:40 <chrismon> kinit(v5): KDC reply did not match expectations while getting initial credentials
+19:36:58 <cclausen> yes
+19:37:01 <chrismon> I know its not the usual problem is incorrectly casing the realm, etc., names
+19:37:08 <cclausen> time set correctly?
+19:37:10 <chrismon> yep
+19:37:13 <chrismon> :)
+19:37:18 <cclausen> what version of Windows?
+19:37:20 <chrismon> preauthentication works fine
+19:37:22 <cclausen> time zeon set correctly?
+19:37:24 <chrismon> server 2003
+19:37:26 <cclausen> r2?
+19:37:33 <cclausen> sp2?
+19:37:40 <chrismon> running native 2000 ad, i think its called
+19:37:41 <chrismon> one sec..
+19:38:08 <chrismon> the windows admin says "r2 sp2". "both?" "yes"
+19:38:15 <cclausen> yes
+19:38:21 <cclausen> ok
+19:38:28 <cclausen> can you post your current krb5.conf somewhere?
+19:38:31 <chrismon> sure
+19:38:34 <cclausen> and what clients are you sinf?
+19:38:37 <cclausen> using?
+19:38:52 <cclausen> (e.g. platform and krb5 version)
+19:39:11 <cclausen> are the clients behind a NAT ?
+19:39:17 <chrismon> [logging]
+19:39:17 <chrismon>  default = FILE:/var/log/krb5libs.log
+19:39:17 <chrismon>  kdc = FILE:/var/log/krb5kdc.log
+19:39:17 <chrismon>  admin_server = FILE:/var/log/kadmind.log
+19:39:17 <chrismon> [libdefaults]
+19:39:18 <chrismon>   default_realm = DAYSPRING-TECH
+19:39:20 <chrismon> [domain_realm]
+19:39:22 <chrismon>         MALACHI3.DAYSPRING.OFFICE = DAYSPRING-TECH
+19:39:24 <chrismon> [realms]
+19:39:26 <chrismon>      DAYSPRING-TECH = {
+19:39:28 <chrismon>                       admin_server = MALACHI3.DAYSPRING.OFFICE:749
+19:39:30 <chrismon>                       kdc          = MALACHI3.DAYSPRING.OFFICE:88
+19:39:32 <chrismon>                     }
+19:39:34 <chrismon> crap
+19:39:36 <chrismon> sorry
+19:39:38 <chrismon> wrong buffer :-/
+19:39:42 <cclausen> in future, please use pastebin.com to post files
+19:39:43 <chrismon> http://pastebin.ca/749557
+19:39:50 <chrismon> yeah...
+19:39:59 <chrismon> just when i pasted, the wrong paste buffer came out, my bad
+19:41:20 <chrismon> so i know the realms and host stuff is right, dns is correct
+19:41:39 <chrismon> for example if i put in a bad password, it will say preauth failed
+19:41:47 <chrismon> and if i put it in right, the client complains..
+19:42:04 <chrismon> i am using freshtly compiled 1.5.4 from MIT (and also tried an older 1.4.3)
+19:42:19 <chrismon> using kinit directly (and the ultimate goal of using it via mod_auth_krb in apache)
+19:42:20 <siezer> does the output if hostname -f match the userPrincipal name in AD?
+19:42:21 <cclausen> try: http://pastebin.ca/749560
+19:42:35 <chrismon> hmm ok , one sec
+19:42:36 <siezer> somehost.somedomain.lan
+19:42:46 <cclausen> user principal name ?
+19:42:48 <cclausen> huh?
+19:42:57 <cclausen> for kiniting as a user why does that matter?
+19:43:10 <siezer> oh he's just kiniting?
+19:43:14 <cclausen> simply using "AD user name"@"AD realm" should work
+19:43:21 <cclausen> chrismon: you are just kiniting as a user, right?
+19:44:43 <chrismon> cclausen, see above, testing with kinit, ultimate goal is mod_auth_kerb
+19:44:52 <chrismon> removing variables as i put it all together ;)
+19:45:24 <cclausen> what OS are you using
+19:46:27 <cclausen> chrismon: do you have access to the Windows logs?
+19:46:37 <cclausen> do you see anything in the securty log on t he DCs when you try and kinit?
+19:46:49 <cclausen> chrismon: is there only a single AD DC?
+19:47:24 <chrismon> kinit(v5): Cannot resolve network address for KDC in requested realm while getting initial credentials
+19:47:32 <chrismon> i'm pretty sure i've corrected all your typos ;)
+19:47:41 <cclausen> yeah, sorry about that
+19:47:50 <chrismon> cclausen, hhm yeah lemme check aboutthe logs
+19:47:51 <cclausen> what does nslookup on the KDC name return?
+19:48:28 <chrismon> its correct
+19:48:42 <cclausen> nslookup the IP address
+19:48:54 <cclausen> does it return the original hostname ?
+19:49:11 <chrismon> "original"?
+19:49:41 <cclausen> nslookup hostname.fqdn
+19:49:44 <cclausen> nslookup IP
+19:49:54 <cclausen> should return hostname.fqdn
+19:50:02 <cclausen> e.g. does forward and reverse DNS match?
+19:51:55 <chrismon> ok i fixed up the conf you gave me, same issue
+19:52:01 <chrismon> getting access to the logs right now
+19:52:02 <cclausen> cannot resolve?
+19:52:07 <chrismon> one sec...
+19:53:10 <cclausen> and is DAYSPRING-TECH the full dns name for the Windows AD domain?
+19:53:22 <cclausen> there is a short name and a longer name
+19:53:30 <cclausen> for instance, the UIUC domain is really AD.UIUC.EDU
+19:53:47 <chrismon> hmm
+19:54:02 <chrismon> not sure what you mean by "dns name for windows ad domain"
+19:54:11 <chrismon> our in-house lan is "dayspring.office"
+19:54:20 <chrismon> the windows domain is "DAYSPRING-TECH"
+19:54:44 <cclausen> what does nslookup DAYSPRING-TECH return?
+19:55:09 <chrismon> nothing for sure
+19:55:17 <cclausen> yeah,
+19:55:24 <cclausen> so thats not the dns name of the AD domain
+19:55:31 <cclausen> or there are dns issues
+19:55:39 <chrismon> malachi3.dayspring.office is the DC
+19:56:09 <cclausen> does kinit user@DAYSPRING.OFFICE do anything?
+19:59:10 <cclausen> chrismon do you have access to a client machine joined to AD?
+19:59:19 <cclausen> (client Windows machine that is)
+19:59:44 <cclausen> download and run: https://www.microsoft.com/downloads/details.aspx?familyid=1581e6e7-7e64-4a2d-8aba-73e909d2a7dc&displaylang=en
+19:59:54 <cclausen> and then klist tgt and paste the output
+20:00:01 <cclausen> it should list the FQDN for the AD domain
+20:00:05 <cclausen> as the realm name
+20:00:26 <chrismon> cant really get much from the DC logs
+20:00:47 <chrismon> a machine joined to AD?
+20:00:52 <chrismon> hmmm
+20:01:00 <cclausen> yes.  like a windows XP machine joined to the domain
+20:01:13 <cclausen> (I assume these exist or else there is not much point in running AD)
+20:01:31 <chrismon> yes...
+20:01:34 <chrismon> one sec..
+20:11:00 <chrismon> heh trying to ru nkinit so we can get creds to use in klist
+20:11:08 <chrismon> have to dl kinit from mit ;_
+20:11:10 <chrismon> ;)
+20:11:13 <cclausen> no
+20:11:15 <cclausen> use the MS one
+20:11:19 <chrismon> cant find it
+20:11:19 <cclausen> I posted the link
+20:11:22 <chrismon> that klist
+20:11:27 <cclausen> yes
+20:11:29 <chrismon> klist needs creds, so it seems
+20:11:29 <cclausen> just run it
+20:11:31 <cclausen> do
+20:11:32 <cclausen> no
+20:11:38 <cclausen> klist tickets
+20:11:41 <chrismon> we ran it, it gives a usage msg
+20:11:46 <chrismon> the word "tickets"?
+20:11:47 <chrismon> hahah
+20:11:53 <cclausen> logging in as a domain user?
+20:12:04 <cclausen> yes, the word tickets
+20:12:45 <cclausen> you need to be on a domain computer logged in as a domain user in order for the Windows SSPI to have tickets as that user
+20:13:52 <chrismon> lol
+20:13:56 <chrismon> yeah klist gave all sorts back
+20:14:03 <chrismon> we're running it on a user desktop in a sec
+20:14:07 <cclausen> what is the krbtgt ?
+20:14:08 <chrismon> haha that cracked me up
+20:14:18 <chrismon> krbtgt/REALM@REALM
+20:14:21 <cclausen> yes
+20:14:27 <cclausen> what is the REALM?
+20:15:13 <chrismon> erm
+20:15:19 <chrismon> its DAYSPRING.OFFICE :-/.
+20:15:27 <chrismon> that should not be O_o
+20:15:33 <chrismon> (i'd thought)
+20:15:59 <cclausen> yeah, well, thats why kinit isn't working
+20:16:13 <chrismon> hah
+20:16:15 <chrismon> yep
+20:16:17 <chrismon> just verified that
+20:16:19 <cclausen> if you fix your krb5.conf to match, I bet thigns will work
+20:16:22 <chrismon> just did
+20:16:23 <chrismon> yep
+20:16:30 <chrismon> ok now to try with mod_auth_kerb
+20:16:32 <cclausen> so, thats working
+20:16:34 <chrismon> thank you so much 
+20:16:41 <chrismon> i get to eat lunch today ;)
+20:16:42 <cclausen> mod_auth_kerb requires a host keytab
+20:16:46 <chrismon> yeah we've got that
+20:16:56 <chrismon> gotta make a new one
+20:16:57 <cclausen> you need the SP2 version of ktpass.exe to generate it
+20:17:09 <cclausen> DO NOT try to use the ktpass.exe from SP1.  Its broken
+20:17:10 <chrismon> afaik
+20:17:14 <cclausen> and it will make you sad
+20:17:14 <chrismon> oh yeah sure
+20:17:16 <chrismon> hahaha
+20:17:29 <chrismon> its funny
+20:17:35 <chrismon> microsoft avoids standards
+20:17:39 <chrismon> and then when they choose one
+20:17:48 <chrismon> they pick one of the most involved
+20:17:51 <chrismon> and make it more complicated!
+20:18:12 <chrismon> i mean shit, i used to do GSSAPI coding and kerberizing apps and this is confusing to me, heh
+20:18:21 <cclausen> actually, MSFT followed the standards exactly for Kerberos
+20:18:30 <cclausen> people are just stupid and can't read RFCs
+20:18:45 <cclausen> SSPI is MSFT's name for GSSAPI
+20:18:51 <cclausen> although the two are not exactly the same
+20:19:06 <cclausen> b/c neither was standard at the time that MSFT needed it
+20:22:30 <cclausen> chrismon: I;d suggest installing KfW on a Windows machine and using FireFox to test mod_auth_kerb
+20:22:44 <cclausen> you'll need to set the auth and possible delegations URIs from about:config
+20:23:04 <cclausen> and set the use native krb5 to false
+20:23:57 <chrismon> woohoo
+20:24:01 <chrismon> works like a charm
+20:24:11 <chrismon> well we dont really need the kfw
+20:24:16 <cclausen> yes
+20:24:18 <chrismon> we're not actually using kerberos
+20:24:22 <cclausen> but its easier to use for testing
+20:24:26 <cclausen> you can ms2mit.exe
+20:24:26 <chrismon> true
+20:24:31 <cclausen> and then use the MIT utils
+20:24:35 <cclausen> like kvno.exe and such 
+20:24:40 <chrismon> the testing here though is really for linux
+20:24:45 <chrismon> the klist thing helped greatly thought,t hank you
+20:25:07 <chrismon> my coworker doesnt know the iff between the AD realm and KDC realm so i took his word for it
+20:25:16 <chrismon> when he told me the AD realm as the KDC one
+20:25:24 <cclausen> well, AD uses two names
+20:25:26 <chrismon> i know nothing about windows, heh
+20:25:28 <cclausen> a DNS domain name
+20:25:29 <chrismon> right
+20:25:30 <cclausen> and a NetBIOS one
+20:25:37 <cclausen> he mentioned the NetBIOS one
+20:25:49 <chrismon> it seems liek a natural windows constraint that they'd for you to use the same ;)
+20:25:50 <chrismon> haha
+20:25:51 <cclausen> which is useful on Windows but not so useful everywhere else.
+20:26:04 <chrismon> but on the other hand, they probabaly force it to be differnt so you can be super confused at ytimes like this ;)
+20:26:07 <cclausen> the DNS name should have been a choice during the AD setup
+20:26:10 <cclausen> so someone picked that
+20:26:23 <cclausen> Windows didn't guess DAYSPRING.OFFICE on its own
+20:26:56 <cclausen> I would certainly recomend using at least two components seperated by a "." for a Windows AD dns name
+20:27:03 <cclausen> not doing so may cause problems
+22:17:45 <chrismon> thanks again cclausen
+23:42:42 <MG_Tak> hadn't quite noticed I wasn't online..
+23:52:12 <MG_Tak> ACTION is puzzled. I'm getting a "Key table entry not found while getting initial credentials" error
+23:52:24 <MG_Tak> when trying to kinit -k -t $keytabfile
+23:52:46 <MG_Tak> but if I klist -k $keytabfile, I see the key for the principal
+23:54:47 <MG_Tak> http://pastebin.org/5989
+23:55:22 <allbery_b> what version of kerberos?
+23:55:30 <MG_Tak> http://pastebin.org/5990
+23:55:32 <allbery_b> in heimdal you have to specify the principal to use
+23:55:35 <MG_Tak> I get some of those
+23:55:41 <allbery_b> dunno about mit
+23:55:43 <MG_Tak> it's MIT
+23:55:48 <MG_Tak> well, I am specifying it..
+23:55:52 <allbery_b> (i.e. it won't use the only principal present in a keytab)
+23:56:44 <allbery_b> hm, I'll have to defer to someone who knows mit
+23:56:47 <MG_Tak> it's MIT 1.5
+23:57:07 <allbery_b> I use that in heimdal often enough that I would quickly know if it broke :>
+23:57:09 <MG_Tak> I can kinit just fine using a password
+23:59:36 <MG_Tak> I wonder if it's an encryption problem

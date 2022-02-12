@@ -1,0 +1,191 @@
+Sample File:
+
+	MD5 hash:
+		7ac8ed47f870d6a5ffe2fd32ca6ad54b
+
+	SHA1 hash:
+		21bedcdedc809587178f2ee25312af1303c44b5d
+
+	SHA256 hash:
+		c372945f4ed8951bd3a768e84cd646ff1ed83482faac73af7a4619321224eb7d
+
+	Filename(s):
+		fontdrvhost.exe
+
+	Filetype:
+		Windows Exe (x86-64)
+
+
+Mutex IOCs:
+
+		Global\.net clr networking
+
+
+Registry Key IOCs:
+
+		HKEY_CURRENT_USER
+		HKEY_CURRENT_USER\Environment
+		HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings\Connections
+		HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System
+		HKEY_LOCAL_MACHINE
+		HKEY_LOCAL_MACHINE\HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender
+		HKEY_LOCAL_MACHINE\HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Exclusions
+		HKEY_LOCAL_MACHINE\SOFTWARE
+		HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\NetSh
+		HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PowerShell\1\ShellIds
+		HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings\Connections
+		HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\WSMAN
+		HKEY_LOCAL_MACHINE\SOFTWARE\Policies
+		HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft
+		HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Exclusions
+		HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender
+		HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Exclusions
+		HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Exclusions\Paths
+		HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\Internet Settings
+		HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest
+		HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\.NET CLR Networking\Performance
+		HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\.net clr networking\Performance
+		HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog
+		HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\Application
+		HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\Application\PowerShell
+		HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\HardwareEvents
+		HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\HardwareEvents\PowerShell
+		HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\Internet Explorer
+		HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\Internet Explorer\PowerShell
+		HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\Key Management Service
+		HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\Key Management Service\PowerShell
+		HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\Media Center
+		HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\Media Center\PowerShell
+		HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\OAlerts
+		HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\OAlerts\PowerShell
+		HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\Security
+		HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\Security\PowerShell
+		HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\System
+		HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\System\PowerShell
+		HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\Windows PowerShell
+		HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\Windows PowerShell\PowerShell
+		HKEY_LOCAL_MACHINE\Software\Microsoft\PowerShell
+		HKEY_LOCAL_MACHINE\Software\Microsoft\PowerShell\1
+		HKEY_LOCAL_MACHINE\Software\Microsoft\PowerShell\1\PowerShellEngine
+		HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion
+		HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment
+		Paths
+
+
+IP IOCs:
+
+		185.48.59.50
+		185.48.59.45
+
+
+URL IOCs:
+
+		msupdate.info/uni/MD5/fontdrvhostx64.exe.md5
+		msupdate.info/uni/fontdrvhostx64.exe
+		msupdate.info/uni/MD5/fontdrvhost.exe.config.md5
+		msupdate.info/uni/fontdrvhost.exe.config
+		msupdate.info/uni/MD5/explorerx64.exe.md5
+		msupdate.info/uni/explorerx64.exe
+		msupdate.info/uni/MD5/Visualx64.zip.md5
+		msupdate.info/uni/Visualx64.zip
+
+
+File IOCs:
+
+	Filenames:
+
+		C:\
+		C:\ProgramData
+		C:\ProgramData\JavaCU.exe
+		C:\ProgramData\Visualx64.zip.md5
+		C:\ProgramData\explorerx64.exe.md5
+		C:\ProgramData\fontdrvhost.exe.config.md5
+		C:\ProgramData\fontdrvhostx64.exe.md5
+		C:\Users
+		C:\Users\5p5NrGJn0jS HALPmcxz
+		C:\Users\5p5NrGJn0jS HALPmcxz\Desktop
+		C:\Users\5p5NrGJn0jS HALPmcxz\Desktop\config.etl
+		C:\Users\5p5NrGJn0jS HALPmcxz\Desktop\fontdrvhost.config
+		C:\Users\5p5NrGJn0jS HALPmcxz\JavaCU.exe
+		C:\Windows
+		C:\Windows\Fonts
+		C:\Windows\Fonts\Arial
+		C:\Windows\Fonts\Arial\explorer.exe
+		C:\Windows\Fonts\Arial\fontdrvhost.exe
+		C:\Windows\Fonts\Arial\fontdrvhost.exe.config
+		C:\Windows\Fonts\Arial\ucrtbase.dll
+		C:\Windows\Fonts\arial\config.etl
+		C:\Windows\Fonts\ttf\config.etl
+		C:\Windows\Logs\Java\config.etl
+		C:\Windows\Logs\firewall_rules.log
+		C:\Windows\Microsoft.NET\Framework64\v2.0.50727\Config\machine.config
+		C:\Windows\System32\WindowsPowerShell\v1.0\Certificate.format.ps1xml
+		C:\Windows\System32\WindowsPowerShell\v1.0\Diagnostics.Format.ps1xml
+		C:\Windows\System32\WindowsPowerShell\v1.0\DotNetTypes.format.ps1xml
+		C:\Windows\System32\WindowsPowerShell\v1.0\FileSystem.format.ps1xml
+		C:\Windows\System32\WindowsPowerShell\v1.0\GetEvent.types.ps1xml
+		C:\Windows\System32\WindowsPowerShell\v1.0\Help.format.ps1xml
+		C:\Windows\System32\WindowsPowerShell\v1.0\PowerShellCore.format.ps1xml
+		C:\Windows\System32\WindowsPowerShell\v1.0\PowerShellTrace.format.ps1xml
+		C:\Windows\System32\WindowsPowerShell\v1.0\Registry.format.ps1xml
+		C:\Windows\System32\WindowsPowerShell\v1.0\WSMan.format.ps1xml
+		C:\Windows\System32\WindowsPowerShell\v1.0\types.ps1xml
+		C:\Windows\System32\drivers
+		C:\Windows\System32\drivers\etc\JavaCU.exe
+		C:\Windows\System32\drivers\fontdrvhost.exe
+		C:\Windows\assembly\GAC_MSIL\System.Management.Automation\1.0.0.0__31bf3856ad364e35\System.Management.Automation.dll
+		C:\Windows\fonts\JavaCU.exe
+		C:\Windows\fonts\ttf
+		C:\Windows\logs
+		C:\Windows\logs\Java
+		C:\Windows\logs\Windowsupdate
+		C:\Windows\system32
+		C:\Windows\system32\chcp.com
+		C:\Windows\system32\drivers\etc
+		C:\Windows\system32\drivers\etc\Visual.zip
+		C:\Windows\system32\drivers\etc\task.xml
+		C:\Windows\system32\drivers\etc\visual
+		C:\Windows\system32\gpupdate.exe
+		C:\Windows\system32\netsh.exe
+		C:\Windows\system32\reg.exe
+		C:\Windows\system32\schtasks.exe
+		C:\Windows\system32\wevtutil.exe
+		C:\Windows\sysvol
+
+	MD5 hashes:
+
+		1c1484aedb538bd8ee95942ea3cd0083
+		4e3927c97506897454a635f00678bb1d
+		5e1e32ef674f92f9d26ac194ad3bafd8
+		8814cc39e75d0282827c9fcfcaf99ca4
+		8b3acef462b291a947bdf186121203fc
+		9a1d84bc974e555a752f08e70267385f
+		ac82a35efaf44a9e6fcc4190e6552635
+		cf831d8d2e77a5914e2a203184c838e8
+		fe0afe313de75353b625ffba51962df5
+
+	SHA1 hashes:
+
+		0c520c8a8d310ba9e0d1ff3172ce59597895a63f
+		1acfd162bd7d0996c8352492cc6524abbb749669
+		2b1dc7159ce7aecb3c464ba9c3f9b3f7f4962c73
+		387a4337379b4e4e10e2cef7730da675b087201f
+		4c0ee517f91d3df52a1dcf7732b5af40844b81a4
+		60fd6ad3bd1a2dd7268ed8d730bc01ca4dcb4655
+		c52ea99fbc0db8437e723c0e1df62d87bd015e89
+		cd21a10fefd7d3b56cc472ff0d6cb4638f0c2493
+		d8733c56a09c613e88aa5cfdc9ca4c89c556cb87
+
+	SHA256 hashes:
+
+		1daa63a2cf18ab344a92523b0bfda74edba7e250fcac0bbb9cb19d73060fc8ef
+		4247486b5030b6dd1b8bee3e50f524b741834cdcd1ae577145686884df0bbb02
+		46c8d4b8f5366cf3f0eba0c988489f78fca6be0981de3d8ec9f0993f3a701729
+		6b549046b6a211b9f3bc0b6a5edf33ee002914c841120d766e34aa3600adf1a7
+		acf90e60f084e58fe114f0e07ad359c74e343b8ea77834450f06bd5341fa8daf
+		cbc161f452b0c993da798cb38455d23248ef839dc5b8314b0c8358a33dee86d1
+		dc08e73f554e1f6ec71a9deeb63cc704c6de4aef74c09e3b1ebee6c8d7127e26
+		eac4bc8aef2848e6e2396619aec4cb4c77eca9d9768393ec1fa5fe49378ec824
+		f72101131782da5830d89408fc1c9dd9ceaf9f2760c080ee8c906f93cf4ce483
+
+
